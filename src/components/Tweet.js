@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { formatTweet, formatDate } from '../utils/helpers'
 import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline } from 'react-icons/ti'
+import { handleToggleTweet } from '../actions/tweets'
 
 const Tweet = (props) => {
     const { tweet } = props
@@ -15,7 +16,12 @@ const Tweet = (props) => {
     }
     const handlelike = (e) => {
         e.preventDefault()
-        //todo: handle like tweet
+        const { dispatch, tweet, authedUser } = props
+        dispatch(handleToggleTweet({
+            id: tweet.id,
+            hasLiked: tweet.hasLiked,
+            authedUser
+        }))
     }
     return (
     <div className="tweet">
@@ -28,7 +34,7 @@ const Tweet = (props) => {
                 <span>{name}</span>
                 <div>{formatDate(timestamp)}</div>
                 {parent && (
-                    <button className='replying-to' onClick={(e) => this.toParent(e, parent.id)}>
+                    <button className='replying-to' onClick={(e) => toParent(e, parent.id)}>
                         Replying to @{parent.author}
                     </button>
                 )}
