@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
 import LoadingBar from 'react-redux-loading'
+import NewTweet from './NewTweet'
+import TweetPage from './TweetPage'
 
 const App = (props) => {
   useEffect(() => {
@@ -12,6 +14,8 @@ const App = (props) => {
     <div>
       <LoadingBar />
       {props.loading === true ? null : <Dashboard />}
+      <NewTweet />
+      <TweetPage match={{params: {id:'8xf0y6ziyjabvozdd253nd'}}}/>
     </div>
   )
 }
